@@ -13,12 +13,25 @@ module.exports = {
         type: Sequelize.DATE
       },
       id_user: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: "users",
+          key: "id"
+        }
       },
       id_meja: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: "mejas",
+          key: "id"
+        }
       },
       nama_pelanggan: {
+        type: Sequelize.STRING
+      },
+      alamat: {
         type: Sequelize.STRING
       },
       status: {

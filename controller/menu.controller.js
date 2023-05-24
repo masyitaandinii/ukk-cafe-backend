@@ -39,6 +39,25 @@ exports.findMenu = async (request, response) => {
     })
 }
 
+exports.findMenubyId = async (request, response) => {
+    let id_menu = request.params.id;
+  
+    menuModel
+      .findOne({ where: { id: id_menu } })
+      .then((result) => {
+        return response.json({
+          success: true,
+          data: result,
+        });
+      })
+      .catch((error) => {
+        return response.json({
+          success: false,
+          message: error.message,
+        });
+      });
+  };
+
 exports.addMenu = (request, response) => {
     upload(request, response, async error => {
         if (error) {
@@ -88,7 +107,7 @@ exports.updateMenu = (request, response) => {
         nama_menu: request.body.nama_menu,
         jenis: request.body.jenis,
         deskripsi: request.body.deskripsi,
-        gambar: request.body.gambar,
+        gambar: request.file.filename,
         harga: request.body.harga,
     }
 

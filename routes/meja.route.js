@@ -3,9 +3,13 @@ const app = express()
 app.use(express.json())
 const mejaController =
 require(`../controller/meja.controller`)
-app.get("/", mejaController.getAllMeja)
-app.post("/add", mejaController.addMeja)
-app.post("/find", mejaController.findMeja)
-app.put("/:id", mejaController.updateMeja)
-app.delete("/:id", mejaController.deleteMeja)
+const auth =
+require(`../auth/auth`)
+
+app.get("/", auth.authVerify, mejaController.getAllMeja)
+app.get("/:id", auth.authVerify, mejaController.findMejabyId);
+app.post("/add", auth.authVerify, mejaController.addMeja)
+app.post("/find", auth.authVerify, mejaController.findMeja)
+app.put("/:id", auth.authVerify, mejaController.updateMeja)
+app.delete("/:id", auth.authVerify, mejaController.deleteMeja)
 module.exports = app

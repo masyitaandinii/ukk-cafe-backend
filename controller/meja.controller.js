@@ -5,8 +5,6 @@ const fs = require(`fs`)
 const md5 = require(`md5`)
 const mysql = require('mysql2');
 
-
-
 exports.getAllMeja = async (request, response) => {
     mejaModel.findAll()
     .then(result => {
@@ -37,6 +35,24 @@ exports.findMeja = async (request, response) => {
       message: `All meja have been loaded`,
     });
   };
+  exports.findMejabyId = async (request, response) => {
+    let id_meja = request.params.id;
+  
+    mejaModel
+      .findOne({ where: { id: id_meja } })
+      .then((result) => {
+        return response.json({
+          success: true,
+          data: result,
+        });
+      })
+      .catch((error) => {
+        return response.json({
+          success: false,
+          message: error.message,
+        });
+      });
+  };
 
   exports.addMeja = async (request, response) => {
     let data = {
@@ -61,7 +77,8 @@ exports.findMeja = async (request, response) => {
 
 exports.updateMeja = async (request, response) => {
         let data = {
-            nomor_meja: request.body.nomor_meja
+            nomor_meja: request.body.nomor_meja,
+            status: request.body.status
             
         }
 

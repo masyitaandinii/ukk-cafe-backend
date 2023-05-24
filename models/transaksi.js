@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // In the Transaksi model file
+this.belongsTo(models.meja, { foreignKey: 'id_meja' });
+this.belongsTo(models.user, { foreignKey: 'id_user' });
+
     }
   }
   transaksi.init({
@@ -18,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     id_user: DataTypes.INTEGER,
     id_meja: DataTypes.INTEGER,
     nama_pelanggan: DataTypes.STRING,
+    alamat: DataTypes.STRING,
+    total: DataTypes.INTEGER,
     status: DataTypes.ENUM('belum_bayar', 'lunas')
   }, {
     sequelize,

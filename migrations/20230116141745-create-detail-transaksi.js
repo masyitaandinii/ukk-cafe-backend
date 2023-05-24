@@ -10,10 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id_transaksi: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: "transaksis",
+          key: "id"
+        }
       },
       id_menu: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references : {
+          model: "menus",
+          key: "id"
+        }
       },
       harga: {
         type: Sequelize.INTEGER

@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // In the Meja model file
+this.hasMany(models.transaksi, { foreignKey: 'id_meja' });
+
     }
   }
   meja.init({
-    nomor_meja: DataTypes.STRING
+    nomor_meja: DataTypes.STRING,
+    status: DataTypes.ENUM('tersedia', 'tidak_tersedia')
   }, {
     sequelize,
     modelName: 'meja',
